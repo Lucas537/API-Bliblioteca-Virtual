@@ -1,9 +1,7 @@
-// src/controllers/CategoriaController.js
 const Categoria = require("../models/CategoriaModel");
-const Livro = require("../models/LivroModel"); // Necessário para a regra de negócio do destroy
+const Livro = require("../models/LivroModel"); 
 
 module.exports = {
-  // GET /categorias
   async index(req, res, next) {
     try {
       const categorias = await Categoria.find();
@@ -13,7 +11,6 @@ module.exports = {
     }
   },
 
-  // GET /categorias/:id
   async show(req, res, next) {
     try {
       const categoria = await Categoria.findById(req.params.id);
@@ -25,18 +22,15 @@ module.exports = {
     }
   },
 
-  // POST /categorias
   async store(req, res, next) {
     try {
       const categoria = await Categoria.create(req.body);
       return res.status(201).json(categoria);
     } catch (err) {
-      // Captura erros de duplicidade de 'nome'
       return next(err);
     }
   },
 
-  // PUT /categorias/:id
   async update(req, res, next) {
     try {
       const categoria = await Categoria.findByIdAndUpdate(
@@ -55,10 +49,8 @@ module.exports = {
     }
   },
 
-  // DELETE /categorias/:id
   async destroy(req, res, next) {
     try {
-      // Regra de Negócio: Impedir deleção se houver livros associados
 
       const Livro = require("../models/LivroModel");
       const livrosAssociados = await Livro.countDocuments({

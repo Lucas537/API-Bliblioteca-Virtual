@@ -1,4 +1,3 @@
-// src/validators/CategoriaValidator.js
 const yup = require("yup");
 
 const store = yup
@@ -8,7 +7,7 @@ const store = yup
       .min(3)
       .max(50)
       .required("O nome da categoria é obrigatório."),
-    descricao: yup.string().max(200).nullable(), // Campo opcional
+    descricao: yup.string().max(200).nullable(), 
   })
   .noUnknown();
 

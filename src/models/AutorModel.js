@@ -1,4 +1,3 @@
-// src/models/AutorModel.js
 const { Schema, model } = require("mongoose");
 
 const AutorSchema = new Schema(

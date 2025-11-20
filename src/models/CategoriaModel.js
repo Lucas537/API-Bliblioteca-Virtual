@@ -1,4 +1,3 @@
-// src/models/CategoriaModel.js
 const { Schema, model } = require("mongoose");
 
 const CategoriaSchema = new Schema(

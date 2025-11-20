@@ -1,7 +1,5 @@
-// src/controllers/LivroController.js
 const Livro = require("../models/LivroModel");
 
-// Array de campos de relacionamento para usar no .populate()
 const populateFields = [
   { path: "idAutor", select: "nomeCompleto nacionalidade" },
   { path: "idEditora", select: "nome cnpj" },
@@ -9,10 +7,8 @@ const populateFields = [
 ];
 
 module.exports = {
-  // GET /livros (Buscar todos)
   async index(req, res, next) {
     try {
-      // Popula os campos de relacionamento para exibir dados completos
       const livros = await Livro.find().populate(populateFields);
       return res.json(livros);
     } catch (err) {
@@ -20,7 +16,6 @@ module.exports = {
     }
   },
 
-  // GET /livros/:id (Buscar um específico)
   async show(req, res, next) {
     try {
       const { id } = req.params;
@@ -35,23 +30,18 @@ module.exports = {
     }
   },
 
-  // POST /livros (Criar novo)
   async store(req, res, next) {
     try {
-      // O req.body já está validado pelo Yup/validate.js
       const livro = await Livro.create(req.body);
-      // Retorna o objeto criado com status 201 (Created)
       return res.status(201).json(livro);
     } catch (err) {
       return next(err);
     }
   },
 
-  // PUT /livros/:id (Atualizar)
   async update(req, res, next) {
     try {
       const { id } = req.params;
-      // Validação de estoque (Regra de Negócio): Impede que o estoque fique negativo
       if (req.body.estoque && req.body.estoque < 0) {
         return res
           .status(400)
@@ -59,8 +49,8 @@ module.exports = {
       }
 
       const livro = await Livro.findByIdAndUpdate(id, req.body, {
-        new: true, // Retorna o documento atualizado
-        runValidators: true, // Roda as validações do Mongoose
+        new: true,
+        runValidators: true,
       });
 
       if (!livro)
@@ -72,7 +62,6 @@ module.exports = {
     }
   },
 
-  // DELETE /livros/:id (Deletar)
   async destroy(req, res, next) {
     try {
       const { id } = req.params;
@@ -81,7 +70,6 @@ module.exports = {
       if (!livro)
         return res.status(404).json({ message: "Livro não encontrado." });
 
-      // Retorna status 204 (No Content) para deleção bem sucedida
       return res.status(204).send();
     } catch (err) {
       return next(err);

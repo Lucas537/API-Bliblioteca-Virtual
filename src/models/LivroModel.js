@@ -1,4 +1,3 @@
-// src/models/LivroModel.js
 const { Schema, model } = require("mongoose");
 
 const LivroSchema = new Schema(
@@ -13,7 +12,6 @@ const LivroSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      // Validação de formato/regex pode ser feita aqui ou no Yup
     },
     anoPublicacao: {
       type: Number,
@@ -32,7 +30,6 @@ const LivroSchema = new Schema(
       default: 0,
       min: [0, "O estoque não pode ser negativo."],
     },
-    // Relacionamentos - Pelo menos 5 relacionamentos exigidos
     idAutor: {
       type: Schema.Types.ObjectId,
       ref: "Autor",
@@ -58,7 +55,6 @@ const LivroSchema = new Schema(
   { timestamps: true }
 );
 
-// Adicionando um índice para buscas eficientes
 LivroSchema.index({ titulo: "text" });
 
 module.exports = model("Livro", LivroSchema);
