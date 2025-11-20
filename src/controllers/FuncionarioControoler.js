@@ -1,6 +1,6 @@
 // src/controllers/FuncionarioController.js
 const Funcionario = require("../models/FuncionarioModel");
-// const Emprestimo = require("../models/EmprestimoModel"); // Necessário para a regra de negócio do destroy
+const Emprestimo = require("../models/EmprestimoModel"); // Necessário para a regra de negócio do destroy
 
 module.exports = {
   // GET /funcionarios
@@ -58,13 +58,17 @@ module.exports = {
   async destroy(req, res, next) {
     try {
       // Regra de Negócio: Impedir deleção se o funcionário tiver empréstimos ativos ou registrados
-      /*
-            const Emprestimo = require("../models/EmprestimoModel");
-            const emprestimosRegistrados = await Emprestimo.countDocuments({ idFuncionario: req.params.id });
-            if (emprestimosRegistrados > 0) {
-                return res.status(400).json({ message: "Funcionário não pode ser deletado pois registrou operações." });
-            }
-            */
+
+      const Emprestimo = require("../models/EmprestimoModel");
+      const emprestimosRegistrados = await Emprestimo.countDocuments({
+        idFuncionario: req.params.id,
+      });
+      if (emprestimosRegistrados > 0) {
+        return res.status(400).json({
+          message:
+            "Funcionário não pode ser deletado pois registrou operações.",
+        });
+      }
 
       const funcionario = await Funcionario.findByIdAndDelete(req.params.id);
       if (!funcionario)
