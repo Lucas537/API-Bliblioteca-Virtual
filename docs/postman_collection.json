@@ -1,0 +1,811 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+    "name": "API Biblioteca Digital - TRABALHO BACKEND ",
+    "description": "Coleção completa para testar a API de Biblioteca Digital.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01. Livros",
+      "description": "CRUD Principal. Requer IDs válidos de Autor, Editora e Categoria.",
+      "item": [
+        {
+          "name": "GET | Listar Todos os Livros",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/livros",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "livros"]
+            }
+          }
+        },
+        {
+          "name": "GET | Buscar Livro por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/livros/{{livroId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "livros", "{{livroId}}"]
+            }
+          }
+        },
+        {
+          "name": "POST | Criar Novo Livro",
+          "description": "Exemplo de criação. **idAutor, idEditora, idCategoria** devem ser ObjectIds válidos.",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"titulo\": \"O Senhor dos Anéis: A Sociedade do Anel\",\n    \"isbn\": \"978-8575003260\",\n    \"anoPublicacao\": 1954,\n    \"paginas\": 576,\n    \"estoque\": 5,\n    \"idAutor\": \"{{autorId}}\",\n    \"idEditora\": \"{{editoraId}}\",\n    \"idCategoria\": \"{{categoriaId}}\",\n    \"tags\": [\"fantasia\", \"épico\"]\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "PUT | Atualizar Livro (Parcial)",
+          "description": "Atualiza o estoque e tags (atualização parcial).",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"estoque\": 8,\n    \"tags\": [\"fantasia\", \"épico\", \"clássico\"]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/livros/{{livroId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "livros", "{{livroId}}"]
+            }
+          }
+        },
+        {
+          "name": "DELETE | Excluir Livro",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/livros/{{livroId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "livros", "{{livroId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "02. Autores",
+      "description": "CRUD para o cadastro de autores.",
+      "item": [
+        {
+          "name": "GET | Listar Todos os Autores",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/autores",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "autores"]
+            }
+          }
+        },
+        {
+          "name": "GET | Buscar Autor por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/autores/{{autorId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "autores", "{{autorId}}"]
+            }
+          }
+        },
+        {
+          "name": "POST | Criar Novo Autor",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nomeCompleto\": \"J.R.R. Tolkien\",\n    \"nacionalidade\": \"Britânica\",\n    \"dataNascimento\": \"1892-01-03\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/autores",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "autores"]
+            }
+          }
+        },
+        {
+          "name": "PUT | Atualizar Autor",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nacionalidade\": \"Sul-Africana (Nascimento)\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/autores/{{autorId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "autores", "{{autorId}}"]
+            }
+          }
+        },
+        {
+          "name": "DELETE | Excluir Autor",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/autores/{{autorId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "autores", "{{autorId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "03. Editoras",
+      "description": "CRUD para o cadastro de editoras.",
+      "item": [
+        {
+          "name": "GET | Listar Todas as Editoras",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/editoras",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "editoras"]
+            }
+          }
+        },
+        {
+          "name": "GET | Buscar Editora por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/editoras/{{editoraId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "editoras", "{{editoraId}}"]
+            }
+          }
+        },
+        {
+          "name": "POST | Criar Nova Editora",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nome\": \"HarperCollins Brasil\",\n    \"cnpj\": \"12.345.678/0001-90\",\n    \"email\": \"contato@hcbrasil.com.br\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/editoras",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "editoras"]
+            }
+          }
+        },
+        {
+          "name": "PUT | Atualizar Editora",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"novo_contato@hcbrasil.com.br\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/editoras/{{editoraId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "editoras", "{{editoraId}}"]
+            }
+          }
+        },
+        {
+          "name": "DELETE | Excluir Editora",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/editoras/{{editoraId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "editoras", "{{editoraId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "04. Leitores",
+      "description": "CRUD para o cadastro de leitores (usuários da biblioteca).",
+      "item": [
+        {
+          "name": "GET | Listar Todos os Leitores",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/leitores",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "leitores"]
+            }
+          }
+        },
+        {
+          "name": "GET | Buscar Leitor por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/leitores/{{leitorId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "leitores", "{{leitorId}}"]
+            }
+          }
+        },
+        {
+          "name": "POST | Criar Novo Leitor",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nome\": \"Maria Silva\",\n    \"cpf\": \"123.456.789-00\",\n    \"telefone\": \"(11) 98765-4321\",\n    \"email\": \"maria.silva@exemplo.com\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/leitores",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "leitores"]
+            }
+          }
+        },
+        {
+          "name": "PUT | Atualizar Leitor",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"telefone\": \"(11) 99999-9999\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/leitores/{{leitorId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "leitores", "{{leitorId}}"]
+            }
+          }
+        },
+        {
+          "name": "DELETE | Excluir Leitor",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/leitores/{{leitorId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "leitores", "{{leitorId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "05. Categorias",
+      "description": "CRUD para o cadastro de categorias de livros.",
+      "item": [
+        {
+          "name": "GET | Listar Todas as Categorias",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/categorias",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "categorias"]
+            }
+          }
+        },
+        {
+          "name": "GET | Buscar Categoria por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/categorias/{{categoriaId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "categorias", "{{categoriaId}}"]
+            }
+          }
+        },
+        {
+          "name": "POST | Criar Nova Categoria",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nome\": \"Ficção Fantástica\",\n    \"descricao\": \"Livros de fantasia com elementos mágicos e mundos construídos.\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/categorias",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "categorias"]
+            }
+          }
+        },
+        {
+          "name": "PUT | Atualizar Categoria",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nome\": \"Fantasia Épica\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/categorias/{{categoriaId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "categorias", "{{categoriaId}}"]
+            }
+          }
+        },
+        {
+          "name": "DELETE | Excluir Categoria",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/categorias/{{categoriaId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "categorias", "{{categoriaId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "06. Funcionários",
+      "description": "CRUD para o cadastro de funcionários da biblioteca.",
+      "item": [
+        {
+          "name": "GET | Listar Todos os Funcionários",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/funcionarios",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "funcionarios"]
+            }
+          }
+        },
+        {
+          "name": "GET | Buscar Funcionário por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/funcionarios/{{funcionarioId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "funcionarios", "{{funcionarioId}}"]
+            }
+          }
+        },
+        {
+          "name": "POST | Criar Novo Funcionário",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nome\": \"Carlos Souza\",\n    \"cargo\": \"Bibliotecário\",\n    \"salario\": 3500.50\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/funcionarios",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "funcionarios"]
+            }
+          }
+        },
+        {
+          "name": "PUT | Atualizar Funcionário",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"cargo\": \"Gerente\",\n    \"salario\": 4500.00\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/funcionarios/{{funcionarioId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "funcionarios", "{{funcionarioId}}"]
+            }
+          }
+        },
+        {
+          "name": "DELETE | Excluir Funcionário",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/funcionarios/{{funcionarioId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "funcionarios", "{{funcionarioId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "07. Empréstimos",
+      "description": "CRUD para registrar empréstimos. Requer IDs de Livro, Leitor e Funcionário.",
+      "item": [
+        {
+          "name": "GET | Listar Todos os Empréstimos",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/emprestimos",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "emprestimos"]
+            }
+          }
+        },
+        {
+          "name": "GET | Buscar Empréstimo por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/emprestimos/{{emprestimoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "emprestimos", "{{emprestimoId}}"]
+            }
+          }
+        },
+        {
+          "name": "POST | Criar Novo Empréstimo",
+          "description": "Cria um novo empréstimo. Assumir que as datas são no formato AAAA-MM-DD. Requer Livro, Leitor e Funcionário.",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"idLivro\": \"{{livroId}}\",\n    \"idLeitor\": \"{{leitorId}}\",\n    \"idFuncionario\": \"{{funcionarioId}}\",\n    \"dataEmprestimo\": \"2025-11-20\",\n    \"dataPrevistaDevolucao\": \"2025-12-05\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/emprestimos",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "emprestimos"]
+            }
+          }
+        },
+        {
+          "name": "PUT | Registrar Devolução/Atualizar Empréstimo",
+          "description": "Atualiza o status para 'Devolvido' e registra a data real de devolução.",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"dataDevolucaoReal\": \"2025-12-03\",\n    \"status\": \"Devolvido\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/emprestimos/{{emprestimoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "emprestimos", "{{emprestimoId}}"]
+            }
+          }
+        },
+        {
+          "name": "DELETE | Excluir Empréstimo",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/emprestimos/{{emprestimoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "emprestimos", "{{emprestimoId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "08. Avaliações",
+      "description": "CRUD para leitores registrarem notas e comentários sobre livros. Requer IDs de Livro e Leitor.",
+      "item": [
+        {
+          "name": "GET | Listar Todas as Avaliações",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/avaliacoes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "avaliacoes"]
+            }
+          }
+        },
+        {
+          "name": "GET | Buscar Avaliação por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/avaliacoes/{{avaliacaoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "avaliacoes", "{{avaliacaoId}}"]
+            }
+          }
+        },
+        {
+          "name": "POST | Criar Nova Avaliação",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"idLivro\": \"{{livroId}}\",\n    \"idLeitor\": \"{{leitorId}}\",\n    \"nota\": 5,\n    \"comentario\": \"Excelente obra, leitura obrigatória para fãs de fantasia!\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/avaliacoes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "avaliacoes"]
+            }
+          }
+        },
+        {
+          "name": "PUT | Atualizar Avaliação",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nota\": 4,\n    \"comentario\": \"Achei o final um pouco apressado, mas ainda excelente.\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/avaliacoes/{{avaliacaoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "avaliacoes", "{{avaliacaoId}}"]
+            }
+          }
+        },
+        {
+          "name": "DELETE | Excluir Avaliação",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/avaliacoes/{{avaliacaoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "avaliacoes", "{{avaliacaoId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "09. Localizações",
+      "description": "CRUD para registrar a localização física dos livros na biblioteca. Requer IDs de Livro.",
+      "item": [
+        {
+          "name": "GET | Listar Todas as Localizações",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/localizacoes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "localizacoes"]
+            }
+          }
+        },
+        {
+          "name": "GET | Buscar Localização por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/localizacoes/{{localizacaoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "localizacoes", "{{localizacaoId}}"]
+            }
+          }
+        },
+        {
+          "name": "POST | Criar Nova Localização",
+          "description": "Cria a localização de um Livro. idLivro deve ser único neste registro.",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"idLivro\": \"{{livroId}}\",\n    \"andar\": \"1º Andar\",\n    \"setor\": \"Ficção\",\n    \"corredor\": \"F5\",\n    \"estante\": \"B3\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/localizacoes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "localizacoes"]
+            }
+          }
+        },
+        {
+          "name": "PUT | Atualizar Localização (Realocação)",
+          "description": "Atualiza a localização física do livro (ex: mudança de estante).",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"corredor\": \"F6\",\n    \"estante\": \"C1\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/localizacoes/{{localizacaoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "localizacoes", "{{localizacaoId}}"]
+            }
+          }
+        },
+        {
+          "name": "DELETE | Excluir Localização",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/localizacoes/{{localizacaoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "localizacoes", "{{localizacaoId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "10. Reservas",
+      "description": "CRUD para o controle de filas de espera por livros. Requer IDs de Livro e Leitor.",
+      "item": [
+        {
+          "name": "GET | Listar Todas as Reservas",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/reservas",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reservas"]
+            }
+          }
+        },
+        {
+          "name": "GET | Buscar Reserva por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/reservas/{{reservaId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reservas", "{{reservaId}}"]
+            }
+          }
+        },
+        {
+          "name": "POST | Criar Nova Reserva",
+          "description": "Cria uma nova reserva com status 'Pendente'.",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"idLivro\": \"{{livroId}}\",\n    \"idLeitor\": \"{{leitorId}}\",\n    \"dataReserva\": \"2025-11-20\",\n    \"dataLimiteRetirada\": \"2025-11-27\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reservas",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reservas"]
+            }
+          }
+        },
+        {
+          "name": "PUT | Atualizar Status da Reserva",
+          "description": "Atualiza o status da reserva (ex: de 'Pendente' para 'Cancelada').",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\": \"Cancelada\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reservas/{{reservaId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reservas", "{{reservaId}}"]
+            }
+          }
+        },
+        {
+          "name": "DELETE | Excluir Reserva",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/reservas/{{reservaId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "reservas", "{{reservaId}}"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string",
+      "description": "Base URL da API (sem o /api)"
+    },
+    {
+      "key": "livroId",
+      "value": "655b3c40a1b2c3d4e5f67890",
+      "type": "string",
+      "description": "ID de exemplo para Livro"
+    },
+    {
+      "key": "autorId",
+      "value": "655b3c40a1b2c3d4e5f67891",
+      "type": "string",
+      "description": "ID de exemplo para Autor"
+    },
+    {
+      "key": "editoraId",
+      "value": "655b3c40a1b2c3d4e5f67892",
+      "type": "string",
+      "description": "ID de exemplo para Editora"
+    },
+    {
+      "key": "leitorId",
+      "value": "655b3c40a1b2c3d4e5f67893",
+      "type": "string",
+      "description": "ID de exemplo para Leitor"
+    },
+    {
+      "key": "categoriaId",
+      "value": "655b3c40a1b2c3d4e5f67894",
+      "type": "string",
+      "description": "ID de exemplo para Categoria"
+    },
+    {
+      "key": "funcionarioId",
+      "value": "655b3c40a1b2c3d4e5f67895",
+      "type": "string",
+      "description": "ID de exemplo para Funcionário"
+    },
+    {
+      "key": "emprestimoId",
+      "value": "655b3c40a1b2c3d4e5f67896",
+      "type": "string",
+      "description": "ID de exemplo para Empréstimo"
+    },
+    {
+      "key": "avaliacaoId",
+      "value": "655b3c40a1b2c3d4e5f67897",
+      "type": "string",
+      "description": "ID de exemplo para Avaliação"
+    },
+    {
+      "key": "localizacaoId",
+      "value": "655b3c40a1b2c3d4e5f67898",
+      "type": "string",
+      "description": "ID de exemplo para Localização"
+    },
+    {
+      "key": "reservaId",
+      "value": "655b3c40a1b2c3d4e5f67899",
+      "type": "string",
+      "description": "ID de exemplo para Reserva"
+    }
+  ]
+}
