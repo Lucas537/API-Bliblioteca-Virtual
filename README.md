@@ -198,7 +198,7 @@ A API possui 10 recursos principais. Todos aceitam os métodos `GET`, `POST`, `P
 
 📄 **Documentação Completa:**
 Para testar todas as rotas, importe o arquivo JSON no Postman:
-➡️ **[docs/postman_collection.json](https://www.google.com/search?q=docs/postman_collection.json)**
+➡️ **[docs/postman_collection.json](docs/postman_collection.json)**
 
 ## 👥 Alunos e Contribuições
 
