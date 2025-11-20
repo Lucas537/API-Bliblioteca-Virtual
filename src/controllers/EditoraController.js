@@ -1,6 +1,6 @@
 // src/controllers/EditoraController.js
 const Editora = require("../models/EditoraModel");
-// const Livro = require("../models/LivroModel"); // Necessário para a regra de negócio do destroy
+const Livro = require("../models/LivroModel"); // Necessário para a regra de negócio do destroy
 
 module.exports = {
   // GET /editoras
@@ -55,12 +55,16 @@ module.exports = {
   async destroy(req, res, next) {
     try {
       // Regra de Negócio: Impedir deleção se houver livros associados
-      /*
-            const livrosAssociados = await Livro.countDocuments({ idEditora: req.params.id });
-            if (livrosAssociados > 0) {
-                return res.status(400).json({ message: "Editora não pode ser deletada pois possui livros cadastrados." });
-            }
-            */
+
+      const livrosAssociados = await Livro.countDocuments({
+        idEditora: req.params.id,
+      });
+      if (livrosAssociados > 0) {
+        return res.status(400).json({
+          message:
+            "Editora não pode ser deletada pois possui livros cadastrados.",
+        });
+      }
 
       const editora = await Editora.findByIdAndDelete(req.params.id);
       if (!editora)

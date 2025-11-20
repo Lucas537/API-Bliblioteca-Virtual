@@ -1,6 +1,6 @@
 // src/controllers/EmprestimoController.js
 const Emprestimo = require("../models/EmprestimoModel");
-// const Livro = require("../models/LivroModel"); // Necessário para a regra de negócio de estoque
+const Livro = require("../models/LivroModel"); // Necessário para a regra de negócio de estoque
 
 const populateFields = [
   { path: "idLivro", select: "titulo isbn estoque" },
@@ -37,15 +37,18 @@ module.exports = {
   async store(req, res, next) {
     try {
       // Regra de Negócio: Verificar se o livro está em estoque
-      /*
-            const Livro = require("../models/LivroModel");
-            const livro = await Livro.findById(req.body.idLivro);
-            if (!livro || livro.estoque < 1) {
-                return res.status(400).json({ message: "Livro sem estoque disponível para empréstimo." });
-            }
-            // Decrementa o estoque
-            await Livro.findByIdAndUpdate(req.body.idLivro, { $inc: { estoque: -1 } });
-            */
+
+      const Livro = require("../models/LivroModel");
+      const livro = await Livro.findById(req.body.idLivro);
+      if (!livro || livro.estoque < 1) {
+        return res
+          .status(400)
+          .json({ message: "Livro sem estoque disponível para empréstimo." });
+      }
+      // Decrementa o estoque
+      await Livro.findByIdAndUpdate(req.body.idLivro, {
+        $inc: { estoque: -1 },
+      });
 
       const emprestimo = await Emprestimo.create(req.body);
       return res.status(201).json(emprestimo);
@@ -58,13 +61,17 @@ module.exports = {
   async update(req, res, next) {
     try {
       // Regra de Negócio: Se o status for alterado para 'Devolvido', incrementar o estoque
-      /*
-            const originalLoan = await Emprestimo.findById(req.params.id);
-            if (req.body.status === 'Devolvido' && originalLoan.status !== 'Devolvido') {
-                const Livro = require("../models/LivroModel");
-                await Livro.findByIdAndUpdate(originalLoan.idLivro, { $inc: { estoque: 1 } });
-            }
-            */
+
+      const originalLoan = await Emprestimo.findById(req.params.id);
+      if (
+        req.body.status === "Devolvido" &&
+        originalLoan.status !== "Devolvido"
+      ) {
+        const Livro = require("../models/LivroModel");
+        await Livro.findByIdAndUpdate(originalLoan.idLivro, {
+          $inc: { estoque: 1 },
+        });
+      }
 
       const emprestimo = await Emprestimo.findByIdAndUpdate(
         req.params.id,

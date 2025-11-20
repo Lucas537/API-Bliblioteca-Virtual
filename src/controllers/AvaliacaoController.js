@@ -56,7 +56,6 @@ module.exports = {
       );
       if (!avaliacao)
         return res.status(404).json({ message: "Avaliação não encontrada." });
-      // Regra de Negócio: Recalcular a média de avaliação do livro após esta atualização
       return res.json(avaliacao);
     } catch (err) {
       return next(err);
@@ -69,7 +68,6 @@ module.exports = {
       const avaliacao = await Avaliacao.findByIdAndDelete(req.params.id);
       if (!avaliacao)
         return res.status(404).json({ message: "Avaliação não encontrada." });
-      // Regra de Negócio: Recalcular a média de avaliação do livro após esta exclusão
       return res.status(204).send();
     } catch (err) {
       return next(err);
