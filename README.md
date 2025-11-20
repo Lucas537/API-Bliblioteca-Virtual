@@ -145,7 +145,7 @@ Para executar este projeto localmente, siga os passos abaixo:
 1.  **Clone o repositório:**
 
     ```bash
-    git clone [https://github.com/seu-usuario/api-biblioteca.git](https://github.com/seu-usuario/api-biblioteca.git)
+    git clone https://github.com/Lucas537/API-Bliblioteca-Virtual.git
     ```
 
 2.  **Navegue até o diretório do projeto:**
