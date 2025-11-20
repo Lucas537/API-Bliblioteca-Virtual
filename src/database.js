@@ -1,7 +1,5 @@
-// src/database.js
 const mongoose = require("mongoose");
 
-// Construir a URI do MongoDB a partir das variáveis de ambiente
 const buildMongoURI = () => {
   const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env;
   if (!DB_USER || !DB_PASS || !DB_HOST || !DB_NAME) {
@@ -17,12 +15,10 @@ const connect = async () => {
 
   try {
     await mongoose.connect(uri, {
-      // As opções useNewUrlParser e useUnifiedTopology já são o padrão no Mongoose 6+
     });
     console.log("MongoDB conectado com sucesso ao Atlas!");
   } catch (err) {
     console.error("Erro na conexão com MongoDB:", err);
-    // Garante que o processo seja encerrado se o banco de dados falhar
     process.exit(1);
   }
 };

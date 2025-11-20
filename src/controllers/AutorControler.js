@@ -1,8 +1,6 @@
-// src/controllers/AutorController.js
 const Autor = require("../models/AutorModel");
 
 module.exports = {
-  // GET /autores
   async index(req, res, next) {
     try {
       const autores = await Autor.find();
@@ -12,7 +10,6 @@ module.exports = {
     }
   },
 
-  // GET /autores/:id
   async show(req, res, next) {
     try {
       const autor = await Autor.findById(req.params.id);
@@ -24,7 +21,6 @@ module.exports = {
     }
   },
 
-  // POST /autores
   async store(req, res, next) {
     try {
       const autor = await Autor.create(req.body);
@@ -34,7 +30,6 @@ module.exports = {
     }
   },
 
-  // PUT /autores/:id
   async update(req, res, next) {
     try {
       const autor = await Autor.findByIdAndUpdate(req.params.id, req.body, {
@@ -49,10 +44,8 @@ module.exports = {
     }
   },
 
-  // DELETE /autores/:id
   async destroy(req, res, next) {
     try {
-      // Regra de Negócio: Verificar se há livros associados antes de deletar (opcional, mas boa prática)
       const Livro = require("../models/LivroModel");
       const livrosAssociados = await Livro.countDocuments({
         idAutor: req.params.id,

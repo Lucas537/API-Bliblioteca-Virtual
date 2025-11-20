@@ -1,7 +1,5 @@
-// src/validators/LivroValidator.js
 const yup = require("yup");
 
-// Regex simples para formato de ISBN (cobre ISBN-10 ou ISBN-13 com ou sem traços)
 const isbnRegex =
   /^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$/;
 
@@ -24,7 +22,6 @@ const store = yup
       .default(0)
       .required("O estoque é obrigatório."),
 
-    // Validação de IDs de relacionamento (Deve ser uma string/ObjectId válida)
     idAutor: yup
       .string()
       .matches(/^[0-9a-fA-F]{24}$/, "ID de Autor inválido.")
@@ -46,6 +43,6 @@ const store = yup
   })
   .noUnknown();
 
-const update = store.partial(); // Permite atualizar apenas alguns campos
+const update = store.partial();
 
 module.exports = { store, update };
