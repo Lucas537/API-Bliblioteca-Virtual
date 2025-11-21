@@ -1,4 +1,3 @@
-// src/controllers/AvaliacaoController.js
 const Avaliacao = require("../models/AvaliacaoModel");
 
 const populateFields = [
@@ -7,7 +6,6 @@ const populateFields = [
 ];
 
 module.exports = {
-  // GET /avaliacoes
   async index(req, res, next) {
     try {
       const avaliacoes = await Avaliacao.find().populate(populateFields);
@@ -17,7 +15,6 @@ module.exports = {
     }
   },
 
-  // GET /avaliacoes/:id
   async show(req, res, next) {
     try {
       const avaliacao = await Avaliacao.findById(req.params.id).populate(
@@ -31,19 +28,15 @@ module.exports = {
     }
   },
 
-  // POST /avaliacoes
   async store(req, res, next) {
     try {
       const avaliacao = await Avaliacao.create(req.body);
-      // Regra de Negócio: Recalcular a média de avaliação do livro após esta inserção
       return res.status(201).json(avaliacao);
     } catch (err) {
-      // Captura erro de duplicidade se o leitor tentar avaliar o mesmo livro duas vezes
       return next(err);
     }
   },
 
-  // PUT /avaliacoes/:id (Permite o leitor editar sua nota/comentário)
   async update(req, res, next) {
     try {
       const avaliacao = await Avaliacao.findByIdAndUpdate(
@@ -62,7 +55,6 @@ module.exports = {
     }
   },
 
-  // DELETE /avaliacoes/:id
   async destroy(req, res, next) {
     try {
       const avaliacao = await Avaliacao.findByIdAndDelete(req.params.id);

@@ -1,9 +1,7 @@
-// src/models/AvaliacaoModel.js
 const { Schema, model } = require("mongoose");
 
 const AvaliacaoSchema = new Schema(
   {
-    // Relacionamentos Obrigatórios
     idLivro: {
       type: Schema.Types.ObjectId,
       ref: "Livro",
@@ -29,8 +27,6 @@ const AvaliacaoSchema = new Schema(
   },
   {
     timestamps: true,
-    // Adicionar índice composto para garantir que um leitor avalie o mesmo livro apenas uma vez:
-    // index: [{ idLivro: 1, idLeitor: 1 }, { unique: true }]
   }
 );
 

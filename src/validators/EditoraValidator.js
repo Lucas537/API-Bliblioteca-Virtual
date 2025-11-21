@@ -1,7 +1,5 @@
-// src/validators/EditoraValidator.js
 const yup = require("yup");
 
-// Regex simples para CNPJ no formato XX.XXX.XXX/XXXX-XX (opcional)
 const cnpjRegex = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/;
 
 const store = yup
@@ -15,12 +13,12 @@ const store = yup
       .string()
       .matches(cnpjRegex, {
         message: "CNPJ inválido. Use o formato XX.XXX.XXX/XXXX-XX.",
-        excludeEmptyString: true, // Ignora a validação de regex se o campo for nulo/vazio
+        excludeEmptyString: true,
       })
-      .nullable(), // Permite que seja nulo
+      .nullable(),
   })
   .noUnknown();
 
-const update = store.partial(); // Permite atualizar parcialmente
+const update = store.partial(); 
 
 module.exports = { store, update };
