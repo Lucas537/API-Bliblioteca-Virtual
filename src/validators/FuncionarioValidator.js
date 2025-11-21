@@ -1,4 +1,3 @@
-// src/validators/FuncionarioValidator.js
 const yup = require("yup");
 
 const store = yup

@@ -1,10 +1,8 @@
-// src/controllers/LocalizacaoController.js
 const Localizacao = require("../models/LocalizacaoModel");
 
 const populateFields = [{ path: "idLivro", select: "titulo isbn" }];
 
 module.exports = {
-  // GET /localizacoes
   async index(req, res, next) {
     try {
       const localizacoes = await Localizacao.find().populate(populateFields);
@@ -14,7 +12,6 @@ module.exports = {
     }
   },
 
-  // GET /localizacoes/:id
   async show(req, res, next) {
     try {
       const localizacao = await Localizacao.findById(req.params.id).populate(
@@ -28,10 +25,8 @@ module.exports = {
     }
   },
 
-  // POST /localizacoes
   async store(req, res, next) {
     try {
-      // Se o idLivro já existir, o Mongoose/MongoDB disparará um erro de duplicidade (unique: true)
       const localizacao = await Localizacao.create(req.body);
       return res.status(201).json(localizacao);
     } catch (err) {
@@ -39,7 +34,6 @@ module.exports = {
     }
   },
 
-  // PUT /localizacoes/:id (Usado para realocar um livro)
   async update(req, res, next) {
     try {
       const localizacao = await Localizacao.findByIdAndUpdate(
@@ -58,7 +52,6 @@ module.exports = {
     }
   },
 
-  // DELETE /localizacoes/:id
   async destroy(req, res, next) {
     try {
       const localizacao = await Localizacao.findByIdAndDelete(req.params.id);
