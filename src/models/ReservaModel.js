@@ -1,9 +1,7 @@
-// src/models/ReservaModel.js
 const { Schema, model } = require("mongoose");
 
 const ReservaSchema = new Schema(
   {
-    // Relacionamentos Obrigatórios
     idLivro: {
       type: Schema.Types.ObjectId,
       ref: "Livro",
@@ -23,7 +21,6 @@ const ReservaSchema = new Schema(
     dataLimiteRetirada: {
       type: Date,
       required: true,
-      // Regra: Data limite para o leitor retirar o livro antes que a reserva expire
     },
     status: {
       type: String,
@@ -34,8 +31,6 @@ const ReservaSchema = new Schema(
   },
   {
     timestamps: true,
-    // Adicionar índice composto para evitar reservas duplicadas
-    // index: [{ idLivro: 1, idLeitor: 1, status: 1 }, { unique: true, partialFilterExpression: { status: 'Pendente' } }]
   }
 );
 

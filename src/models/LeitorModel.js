@@ -1,4 +1,3 @@
-// src/models/LeitorModel.js
 const { Schema, model } = require("mongoose");
 
 const LeitorSchema = new Schema(
@@ -12,8 +11,8 @@ const LeitorSchema = new Schema(
     cpf: {
       type: String,
       required: true,
-      unique: true, // Garante que não haja CPFs duplicados
-      maxlength: 14, // Permite o formato com pontuação
+      unique: true, 
+      maxlength: 14,
     },
     telefone: {
       type: String,

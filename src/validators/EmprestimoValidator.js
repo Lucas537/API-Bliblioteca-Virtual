@@ -1,6 +1,4 @@
-// src/validators/EmprestimoValidator.js
 const yup = require("yup");
-// Reutiliza a validação para ObjectId
 const objectId = yup
   .string()
   .matches(/^[0-9a-fA-F]{24}$/, "ID de relacionamento inválido.");
@@ -14,7 +12,6 @@ const store = yup
     dataEmprestimo: yup.date().required("A Data de Empréstimo é obrigatória."),
     dataPrevistaDevolucao: yup
       .date()
-      // O campo deve ser maior (mais no futuro) que a dataEmprestimo
       .min(
         yup.ref("dataEmprestimo"),
         "A data prevista de devolução deve ser posterior à data de empréstimo."
@@ -36,6 +33,6 @@ const store = yup
   })
   .noUnknown();
 
-const update = store.partial(); // Permite atualizar apenas campos específicos
+const update = store.partial();
 
 module.exports = { store, update };
