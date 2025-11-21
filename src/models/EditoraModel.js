@@ -1,4 +1,3 @@
-// src/models/EditoraModel.js
 const { Schema, model } = require("mongoose");
 
 const EditoraSchema = new Schema(
@@ -6,14 +5,14 @@ const EditoraSchema = new Schema(
     nome: {
       type: String,
       required: true,
-      unique: true, // Garante que não haja nomes de editoras duplicados
+      unique: true, 
       minlength: [2, "O nome deve ter no mínimo 2 caracteres."],
     },
     cnpj: {
       type: String,
       unique: true,
-      sparse: true, // Permite valores nulls/undefined se o campo for opcional
-      maxlength: 18, // Permite o formato com pontuação
+      sparse: true, 
+      maxlength: 18, 
     },
     email: {
       type: String,

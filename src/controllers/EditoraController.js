@@ -1,9 +1,7 @@
-// src/controllers/EditoraController.js
 const Editora = require("../models/EditoraModel");
-const Livro = require("../models/LivroModel"); // Necessário para a regra de negócio do destroy
+const Livro = require("../models/LivroModel"); 
 
 module.exports = {
-  // GET /editoras
   async index(req, res, next) {
     try {
       const editoras = await Editora.find();
@@ -13,7 +11,6 @@ module.exports = {
     }
   },
 
-  // GET /editoras/:id
   async show(req, res, next) {
     try {
       const editora = await Editora.findById(req.params.id);
@@ -25,18 +22,15 @@ module.exports = {
     }
   },
 
-  // POST /editoras
   async store(req, res, next) {
     try {
       const editora = await Editora.create(req.body);
       return res.status(201).json(editora);
     } catch (err) {
-      // Captura erros de duplicidade de 'nome' ou 'email'
       return next(err);
     }
   },
 
-  // PUT /editoras/:id
   async update(req, res, next) {
     try {
       const editora = await Editora.findByIdAndUpdate(req.params.id, req.body, {
@@ -51,10 +45,8 @@ module.exports = {
     }
   },
 
-  // DELETE /editoras/:id
   async destroy(req, res, next) {
     try {
-      // Regra de Negócio: Impedir deleção se houver livros associados
 
       const livrosAssociados = await Livro.countDocuments({
         idEditora: req.params.id,
