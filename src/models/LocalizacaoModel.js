@@ -1,14 +1,12 @@
-// src/models/LocalizacaoModel.js
 const { Schema, model } = require("mongoose");
 
 const LocalizacaoSchema = new Schema(
   {
-    // Relacionamento Obrigatório (Quem está alocado)
     idLivro: {
       type: Schema.Types.ObjectId,
       ref: "Livro",
       required: true,
-      unique: true, // Garante que cada livro só tenha uma localização
+      unique: true,
     },
 
     andar: {

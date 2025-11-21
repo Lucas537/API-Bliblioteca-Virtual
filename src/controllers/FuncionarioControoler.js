@@ -1,9 +1,7 @@
-// src/controllers/FuncionarioController.js
 const Funcionario = require("../models/FuncionarioModel");
 const Emprestimo = require("../models/EmprestimoModel"); // Necessário para a regra de negócio do destroy
 
 module.exports = {
-  // GET /funcionarios
   async index(req, res, next) {
     try {
       const funcionarios = await Funcionario.find();
@@ -13,7 +11,6 @@ module.exports = {
     }
   },
 
-  // GET /funcionarios/:id
   async show(req, res, next) {
     try {
       const funcionario = await Funcionario.findById(req.params.id);
@@ -35,7 +32,6 @@ module.exports = {
     }
   },
 
-  // PUT /funcionarios/:id
   async update(req, res, next) {
     try {
       const funcionario = await Funcionario.findByIdAndUpdate(
@@ -54,10 +50,8 @@ module.exports = {
     }
   },
 
-  // DELETE /funcionarios/:id
   async destroy(req, res, next) {
     try {
-      // Regra de Negócio: Impedir deleção se o funcionário tiver empréstimos ativos ou registrados
 
       const Emprestimo = require("../models/EmprestimoModel");
       const emprestimosRegistrados = await Emprestimo.countDocuments({

@@ -1,4 +1,3 @@
-// src/models/FuncionarioModel.js
 const { Schema, model } = require("mongoose");
 
 const FuncionarioSchema = new Schema(

@@ -1,6 +1,4 @@
-// src/validators/LocalizacaoValidator.js
 const yup = require("yup");
-// Reutiliza a validação para ObjectId
 const objectId = yup
   .string()
   .matches(/^[0-9a-fA-F]{24}$/, "ID de relacionamento inválido.");
