@@ -1,9 +1,7 @@
-// src/models/EmprestimoModel.js
 const { Schema, model } = require("mongoose");
 
 const EmprestimoSchema = new Schema(
   {
-    // Relacionamentos Obrigatórios (Referencing)
     idLivro: {
       type: Schema.Types.ObjectId,
       ref: "Livro",

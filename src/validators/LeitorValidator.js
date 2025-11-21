@@ -1,9 +1,6 @@
-// src/validators/LeitorValidator.js
 const yup = require("yup");
 
-// Regex para CPF no formato XXX.XXX.XXX-XX
 const cpfRegex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
-// Regex simples para telefone (cobre (XX) XXXXX-XXXX ou XXXXX-XXXX, etc.)
 const phoneRegex = /^\(?\d{2}\)?\s?\d{4,5}\-?\d{4}$/;
 
 const store = yup
